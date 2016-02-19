@@ -5,14 +5,29 @@
 
   <body>
     <div id="image-holder">
+      <canvas id="arrow-canvas" style="position: absolute; top: 0px; left: 0px;"></canvas>
+      <img id="file-image" src=""/>
       <div id="overlay-holder">
       </div>
-
-      <img id="file-image" src=""/>
     </div>
     
-    <h3>Contents of the file:</h3>
-    <pre id="file-content"></pre>
+    <h3>File Info:</h3>
+    <p>Annotation Loading: <span id="loading-success"></span></p>
+    <p>Image Dimensions: <span id="image-dimensions"></span></p>
+
+    <h3>Controls:</h3>
+
+    <p>Blob score &gt; <span id="blob-score-threshold"></span></p>
+    <input type="range" id="blob-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
+
+    <p>Arrowhead score &gt; <span id="arrowhead-score-threshold"></span></p>
+    <input type="range" id="arrowhead-slider" value="100" min="0" max="100" onchange="redraw();" style="width: 400px"/>
+
+    <p>Arrow score &gt; <span id="arrow-score-threshold"></span></p>
+    <input type="range" id="arrow-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
+
+    <p>Text score &gt; <span id="text-score-threshold"></span></p>
+    <input type="range" id="text-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
 
     <script type="text/javascript" src="scripts.js">
     </script>
