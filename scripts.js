@@ -130,16 +130,21 @@ function drawArrowHeads(arrowheads, scoreThreshold) {
 		var centerx = (topleft[1] + bottomright[1]) / 2;
 		var centery = (topleft[0] + bottomright[0]) / 2;
 		
-		c.fillText(id, centerx * IMG_SCALE, centery * IMG_SCALE);
+		c.fillText(id, centerx * IMG_SCALE + 4, centery * IMG_SCALE - 4);
 
 		// Draw the direction of the arrow:
-		var angle = ah["angle"] / 360;
-		var arrowlength = 5;
+		var angle = 2 * Math.PI * ah["angle"] / 360;
+		var arrowlength = 10;
+		var radius = 3;
 		var xcomp = Math.cos(angle) * arrowlength;
-		var ycomp = -1 * Math.sin(angle) * arrowlength;
+		var ycomp = Math.sin(angle) * arrowlength;
 
 		c.beginPath();
 		c.strokeStyle="green";
+		c.fillStyle="green";
+		c.moveTo(centerx * IMG_SCALE, centery * IMG_SCALE);
+		c.arc(centerx * IMG_SCALE, centery * IMG_SCALE, radius, 0, 2 * Math.PI);
+		c.fill();
 		c.moveTo(centerx * IMG_SCALE, centery * IMG_SCALE);
 		c.lineTo( (centerx + xcomp) * IMG_SCALE, (centery + ycomp) * IMG_SCALE);
 		c.stroke();
