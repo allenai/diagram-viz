@@ -4,14 +4,23 @@
     padding: 0;
 }
 
-.bbox {
-    border: 1px solid black;
-}
-
 #image-holder {
     position: relative;
 }
 
-#file-image {
+img {
     border: 3px solid black;
 }
+
+.blob {
+    border: 1px solid black;
+}
+
+.arrowhead {
+    border: 1px solid black;
+}
+
+.text {
+    border: 1px solid black;
+}
+

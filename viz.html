@@ -21,13 +21,19 @@
     <input type="range" id="blob-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
 
     <p>Arrowhead score &gt; <span id="arrowhead-score-threshold"></span></p>
-    <input type="range" id="arrowhead-slider" value="100" min="0" max="100" onchange="redraw();" style="width: 400px"/>
+    <input type="range" id="arrowhead-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
 
     <p>Arrow score &gt; <span id="arrow-score-threshold"></span></p>
     <input type="range" id="arrow-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
 
     <p>Text score &gt; <span id="text-score-threshold"></span></p>
     <input type="range" id="text-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
+
+    <h3>Image Resizing:</h3>
+    <p>Original:</p>
+    <img id="file-image-orig" src=""/>
+    <p>Resized:</p>
+    <img id="file-image-resized" src=""/>
 
     <script type="text/javascript" src="scripts.js">
     </script>

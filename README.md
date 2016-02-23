@@ -4,11 +4,19 @@ Simple HTML/Javascript visualizer for viewing diagram extractions.
 
 ## Setup
 
-Create two directories or symlinks in the git
-repository. ```diagram_candidates``` should point to the candidate
-annotation json and ```images``` should point to the images.
+Create three directories or symlinks in the root
+folder. ```diagram_candidates``` should contain to the candidate
+annotation json in one-json-per-image format, ```images``` should
+contain to the rescaled images, and ```images_original``` should
+contain the original images.
 
-## Use
+```images``` can be populated from the AWS bucket
+```s3:///ai2-vision-datasets/shining2/imagesResized```
 
-Open viz.html?img=<img-id> in Safari (NOT Google Chrome). <img-id>
-should have a ".png" suffix.
+```images_original``` can be populated from the AWS bucket
+```s3:///ai2-vision-datasets/shining2/images```
+
+## Usage
+
+Open viz.html?img=img-id in Safari (NOT Google Chrome),
+e.g. viz.html?img=805.png.

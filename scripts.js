@@ -33,6 +33,14 @@ function displayContents(contents) {
 }
 
 function redraw() {
+    // Clear the canvas.
+    var elt = document.getElementById('arrow-canvas');
+    elt.width = imgWidth * IMG_SCALE;
+    elt.height = imgHeight * IMG_SCALE;
+    var c = elt.getContext("2d");
+    c.clearRect(0, 0, elt.width, elt.height);
+
+    // Draw elements
     constituents = theJson["constituents"];
     blobs = constituents["blobs"];
 
@@ -41,11 +49,12 @@ function redraw() {
 
     var blobThreshold = document.getElementById('blob-slider').value / 100;
     document.getElementById('blob-score-threshold').innerHTML = blobThreshold;
-    overlayHolder.innerHTML += drawBboxes(constituents["blobs"], blobThreshold);
+    overlayHolder.innerHTML += drawBboxes(constituents["blobs"], blobThreshold, "blob");
 
     var arrowHeadThreshold = document.getElementById('arrowhead-slider').value / 100;
     document.getElementById('arrowhead-score-threshold').innerHTML = arrowHeadThreshold;
-    overlayHolder.innerHTML += drawBboxes(constituents["arrowHeads"], arrowHeadThreshold);
+    // overlayHolder.innerHTML += drawBboxes(constituents["arrowHeads"], arrowHeadThreshold, "arrowhead");
+    drawArrowHeads(constituents["arrowHeads"], arrowHeadThreshold);
 
     var arrowThreshold = document.getElementById('arrow-slider').value / 100;
     document.getElementById('arrow-score-threshold').innerHTML = arrowThreshold;
@@ -53,32 +62,30 @@ function redraw() {
 
     var textThreshold = document.getElementById('text-slider').value / 100;
     document.getElementById('text-score-threshold').innerHTML = textThreshold;
-    overlayHolder.innerHTML += drawBboxes(constituents["text"], textThreshold);
+    overlayHolder.innerHTML += drawBboxes(constituents["text"], textThreshold, "text");
 
     // overlayHolder.innerHTML += drawBboxes(constituents["arrowHeads"], 0);
     // overlayHolder.innerHTML += drawBboxes(constituents["arrows"]);
     // overlayHolder.innerHTML += drawBboxes(constituents["text"], 0);
 }
 
-function drawBboxes(blobs, scoreThreshold) {
+function drawBboxes(blobs, scoreThreshold, classId) {
     html = "";
     for (var blobId in blobs) {
 	if (blobs.hasOwnProperty(blobId)) {
 	    var blob = blobs[blobId];
 	    if (blob["score"] > scoreThreshold) {
-		html += getOverlayHtml(blob["bbox"], blobId);
+		html += getOverlayHtml(blob, blobId, classId);
 	    }
 	}
     }
     return html;
 }
 
+
 function drawArrows(arrows, scoreThreshold) {
     var elt = document.getElementById('arrow-canvas');
-    elt.width = imgWidth * IMG_SCALE;
-    elt.height = imgHeight * IMG_SCALE;
     var c = elt.getContext("2d");
-    c.clearRect(0, 0, elt.width, elt.height);
     c.font = "12px Arial";
     c.fillStyle = "red";
     for (var arrowId in arrows) {
@@ -106,9 +113,45 @@ function drawArrows(arrows, scoreThreshold) {
     }
 }
 
-function getOverlayHtml(bbox, id) {
-    topleft = bbox["topleftyx"];
-    bottomright = bbox["bottomrightyx"];
+function drawArrowHeads(arrowheads, scoreThreshold) {
+    var elt = document.getElementById('arrow-canvas');
+    var c = elt.getContext("2d");
+    c.font = "12px Arial";
+    c.fillStyle = "green";
+    for (var id in arrowheads) {
+	if (arrowheads.hasOwnProperty(id)) {
+	    var ah = arrowheads[id];
+
+	    if (ah["score"] > scoreThreshold) {
+		var bbox = ah["bbox"];
+		var topleft = bbox["topleftyx"];
+		var bottomright = bbox["bottomrightyx"];
+
+		var centerx = (topleft[1] + bottomright[1]) / 2;
+		var centery = (topleft[0] + bottomright[0]) / 2;
+		
+		c.fillText(id, centerx * IMG_SCALE, centery * IMG_SCALE);
+
+		// Draw the direction of the arrow:
+		var angle = ah["angle"] / 360;
+		var arrowlength = 5;
+		var xcomp = Math.cos(angle) * arrowlength;
+		var ycomp = -1 * Math.sin(angle) * arrowlength;
+
+		c.beginPath();
+		c.strokeStyle="green";
+		c.moveTo(centerx * IMG_SCALE, centery * IMG_SCALE);
+		c.lineTo( (centerx + xcomp) * IMG_SCALE, (centery + ycomp) * IMG_SCALE);
+		c.stroke();
+	    }
+	}
+    }
+}
+
+function getOverlayHtml(blob, id, classId) {
+    var bbox = blob["bbox"];
+    var topleft = bbox["topleftyx"];
+    var bottomright = bbox["bottomrightyx"];
 
     var top = topleft[0] * IMG_SCALE;
     var left = topleft[1] * IMG_SCALE;
@@ -118,7 +161,7 @@ function getOverlayHtml(bbox, id) {
     style = "position: absolute; left: " + left + "px; top: " + top + "px; "
     style += "width: " + width + "px; height: " + height + "px;"
     
-    return "<div class=\"bbox\" style=\"" + style + "\">" + id + "</div>";
+    return "<div class=\"" + classId + "\" style=\"" + style + "\">" + id + "</div>";
 }
 
 
@@ -132,12 +175,20 @@ var filename = window.location.search.replace("?", "").split("&")[0].split("=")[
 
 var jsonFilename = ("diagram_candidates/" + filename + ".json").trim();
 var imageFilename = ("images/" + filename).trim();
+var imageOriginalFilename = ("images_original/" + filename).trim();
 
 // Read the image and display its natural dimensions
 var imgWidth = 0;
 var imgHeight = 0;
 var imgElt = document.getElementById('file-image');
 imgElt.src = imageFilename;
+
+var imgResizedElt = document.getElementById('file-image-resized');
+imgResizedElt.src = imageFilename;
+
+var imgOrigElt = document.getElementById('file-image-orig');
+imgOrigElt.src = imageOriginalFilename;
+
 var img = new Image();
 img.onload = function() {
     // alert(this.width + " " + this.height);
