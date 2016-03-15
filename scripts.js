@@ -50,23 +50,48 @@ function redraw() {
     var blobThreshold = document.getElementById('blob-slider').value / 100;
     document.getElementById('blob-score-threshold').innerHTML = blobThreshold;
     overlayHolder.innerHTML += drawBboxes(constituents["blobs"], blobThreshold, "blob");
+    document.getElementById('num-blobs').innerHTML = count(blobs, -1);
+    document.getElementById('num-displayed-blobs').innerHTML = count(blobs, blobThreshold);
 
+    var arrowHeads = constituents["arrowHeads"];
     var arrowHeadThreshold = document.getElementById('arrowhead-slider').value / 100;
     document.getElementById('arrowhead-score-threshold').innerHTML = arrowHeadThreshold;
     // overlayHolder.innerHTML += drawBboxes(constituents["arrowHeads"], arrowHeadThreshold, "arrowhead");
-    drawArrowHeads(constituents["arrowHeads"], arrowHeadThreshold);
+    drawArrowHeads(arrowHeads, arrowHeadThreshold);
+    document.getElementById('num-arrowheads').innerHTML = count(arrowHeads, -1);
+    document.getElementById('num-displayed-arrowheads').innerHTML = count(arrowHeads, arrowHeadThreshold);
 
+    var arrows = constituents["arrows"];
     var arrowThreshold = document.getElementById('arrow-slider').value / 100;
     document.getElementById('arrow-score-threshold').innerHTML = arrowThreshold;
-    drawArrows(constituents["arrows"], arrowThreshold);
+    drawArrows(arrows, arrowThreshold);
+    document.getElementById('num-arrows').innerHTML = count(arrows, -1);
+    document.getElementById('num-displayed-arrows').innerHTML = count(arrows, arrowThreshold);
+    
 
+    var texts = constituents["text"];
     var textThreshold = document.getElementById('text-slider').value / 100;
     document.getElementById('text-score-threshold').innerHTML = textThreshold;
-    overlayHolder.innerHTML += drawBboxes(constituents["text"], textThreshold, "text");
+    overlayHolder.innerHTML += drawBboxes(texts, textThreshold, "text");
+    document.getElementById('num-texts').innerHTML = count(texts, -1);
+    document.getElementById('num-displayed-texts').innerHTML = count(texts, textThreshold);
+
 
     // overlayHolder.innerHTML += drawBboxes(constituents["arrowHeads"], 0);
     // overlayHolder.innerHTML += drawBboxes(constituents["arrows"]);
     // overlayHolder.innerHTML += drawBboxes(constituents["text"], 0);
+}
+
+function count(dict, scoreThreshold) {
+    var count = 0;
+    for (var id in dict) {
+	if (dict.hasOwnProperty(id)) {
+	    if (dict[id]["score"] > scoreThreshold) {
+		count++;
+	    }
+	}
+    }
+    return count;
 }
 
 function drawBboxes(blobs, scoreThreshold, classId) {
@@ -129,6 +154,9 @@ function drawArrowHeads(arrowheads, scoreThreshold) {
 
 		var centerx = (topleft[1] + bottomright[1]) / 2;
 		var centery = (topleft[0] + bottomright[0]) / 2;
+
+		// var centerx = ah["yxCentroid"][1];
+		// var centery = ah["yxCentroid"][0];
 		
 		c.fillText(id, centerx * IMG_SCALE + 4, centery * IMG_SCALE - 4);
 
@@ -165,8 +193,15 @@ function getOverlayHtml(blob, id, classId) {
 
     style = "position: absolute; left: " + left + "px; top: " + top + "px; "
     style += "width: " + width + "px; height: " + height + "px;"
+
+    var value = "";
+    /*
+    if (blob.hasOwnProperty("value")) {
+	value = blob["value"];
+    }
+    */
     
-    return "<div class=\"" + classId + "\" style=\"" + style + "\">" + id + "</div>";
+    return "<div class=\"" + classId + "\" style=\"" + style + "\">" + id + " " + value + "</div>";
 }
 
 

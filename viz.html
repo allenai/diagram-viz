@@ -17,17 +17,19 @@
 
     <h3>Controls:</h3>
 
-    <p>Blob score &gt; <span id="blob-score-threshold"></span></p>
+    <p>Blob score &gt; <span id="blob-score-threshold"></span> (<span id="num-displayed-blobs"> </span> / <span id="num-blobs"> </span> visible) </p>
     <input type="range" id="blob-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
 
-    <p>Arrowhead score &gt; <span id="arrowhead-score-threshold"></span></p>
+    <p>Arrowhead score &gt; <span id="arrowhead-score-threshold"></span> (<span id="num-displayed-arrowheads"> </span> / <span id="num-arrowheads"> </span> visible)</p>
     <input type="range" id="arrowhead-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
 
-    <p>Arrow score &gt; <span id="arrow-score-threshold"></span></p>
+    <p>Arrow score &gt; <span id="arrow-score-threshold"></span> (<span id="num-displayed-arrows"> </span> / <span id="num-arrows"> </span> visible)</p>
     <input type="range" id="arrow-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
 
-    <p>Text score &gt; <span id="text-score-threshold"></span></p>
+    <p>Text score &gt; <span id="text-score-threshold"></span> (<span id="num-displayed-texts"> </span> / <span id="num-texts"> </span> visible)</p>
     <input type="range" id="text-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
+
+    <p>Interobject linkages</p>
 
     <h3>Image Resizing:</h3>
     <p>Original:</p>

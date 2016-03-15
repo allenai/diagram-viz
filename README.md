@@ -17,4 +17,4 @@ contain the original images.
 ## Usage
 
 Open viz.html?img=img-id in Safari (NOT Google Chrome),
-e.g. viz.html?img=805.png.
+be.g. viz.html?img=805.png.
