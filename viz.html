@@ -5,9 +5,18 @@
 
   <body>
     <div id="image-holder">
+      <canvas id="hidden-canvas" style="position: absolute; top: 0px; left: 0px; display: none;"></canvas>
       <canvas id="arrow-canvas" style="position: absolute; top: 0px; left: 0px;"></canvas>
       <img id="file-image" src=""/>
       <div id="overlay-holder">
+      </div>
+    </div>
+
+    <div id="right-float">
+      <h3>Selection:</h3>
+      <p>Object: <span id="selected-object"></span></p>
+      <div id="links">
+      
       </div>
     </div>
     
@@ -28,16 +37,15 @@
 
     <p>Text score &gt; <span id="text-score-threshold"></span> (<span id="num-displayed-texts"> </span> / <span id="num-texts"> </span> visible)</p>
     <input type="range" id="text-slider" value="0" min="0" max="100" onchange="redraw();" style="width: 400px"/>
-
-    <p>Interobject linkages</p>
-
+    
     <h3>Image Resizing:</h3>
     <p>Original:</p>
     <img id="file-image-orig" src=""/>
     <p>Resized:</p>
     <img id="file-image-resized" src=""/>
 
-    <script type="text/javascript" src="scripts.js">
+    <script type="text/javascript" src="objects.js"> </script>
+    <script type="text/javascript" src="scripts.js"> </script>
     </script>
   </body>
 
