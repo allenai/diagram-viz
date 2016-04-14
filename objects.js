@@ -10,10 +10,18 @@ function Blob(id, score, topleft, bottomright) {
 
     this.draw = function (c) {
 	c.beginPath();
-	c.font = "12px Arial";
-	c.strokeStyle = "rgba(0, 0, 0, 255)";
-	c.fillStyle = "rgba(0, 0, 0, 255)";
-	c.lineWidth = "1";
+
+	if (this.selected == true) {
+	    c.font = "16px Arial";
+	    c.fillStyle = "blue";
+	    c.strokeStyle = "blue";
+	    c.lineWidth = "3";
+	} else {
+	    c.font = "12px Arial";
+	    c.strokeStyle = "rgba(0, 0, 0, 255)";
+	    c.fillStyle = "rgba(0, 0, 0, 255)";
+	    c.lineWidth = "1";
+	}
 
 	c.rect(topleft[1] * IMG_SCALE, topleft[0]  * IMG_SCALE,
 	       (bottomright[1] - topleft[1]) * IMG_SCALE,
@@ -35,10 +43,18 @@ function Text(id, score, value, topleft, bottomright) {
 
     this.draw = function (c) {
 	c.beginPath();
-	c.font = "12px Arial";
-	c.strokeStyle = "rgba(0, 0, 0, 255)";
-	c.fillStyle = "rgba(0, 0, 0, 255)";
-	c.lineWidth = "1";
+
+	if (this.selected == true) {
+	    c.font = "16px Arial";
+	    c.fillStyle = "blue";
+	    c.strokeStyle = "blue";
+	    c.lineWidth = "3";
+	} else {
+	    c.font = "12px Arial";
+	    c.strokeStyle = "rgba(0, 0, 0, 255)";
+	    c.fillStyle = "rgba(0, 0, 0, 255)";
+	    c.lineWidth = "1";
+	}
 
 	c.rect(topleft[1] * IMG_SCALE, topleft[0]  * IMG_SCALE,
 	       (bottomright[1] - topleft[1]) * IMG_SCALE,
@@ -96,9 +112,17 @@ function ArrowHead(id, score, topleft, bottomright, angle) {
     this.selected = false;
 
     this.draw = function (c) {
-	c.font = "12px Arial";
-	c.strokeStyle = "green";
-	c.fillStyle = "green";
+	if (this.selected == true) {
+	    c.font = "16px Arial";
+	    c.fillStyle = "blue";
+	    c.strokeStyle = "blue";
+	    c.lineWidth = "3";
+	} else {
+	    c.font = "12px Arial";
+	    c.strokeStyle = "green";
+	    c.fillStyle = "green";
+	    c.lineWidth = "1";
+	}
 	
 	var centerx = (this.topleft[1] + this.bottomright[1]) / 2;
 	var centery = (this.topleft[0] + this.bottomright[0]) / 2;

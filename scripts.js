@@ -140,6 +140,10 @@ function redraw() {
 		    var src = iol["origin"];
 		    var dst = iol["destination"];
 		    var score = iol["score"];
+
+		    if (score < 0.01) {
+			continue;
+		    }
 		    
 		    iolElt.innerHTML += "<p>" + score + " " + src + " " + arrowId + " " + dst + "</p>";
 		}
@@ -251,7 +255,7 @@ function selectObject(x, y, objects, config) {
 }
 
 // global parameters
-var IMG_SCALE=2;
+var IMG_SCALE=3;
 
 // Main code that runs on page load.
 
