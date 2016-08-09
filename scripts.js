@@ -246,7 +246,11 @@ function selectObject(x, y, objects, config) {
 
     var selectionElt = document.getElementById('selected-object');
     if (selection >= 0) {
-	selectionElt.innerHTML = objects[selection].id;
+	if (objects[selection].type == "text"){
+		selectionElt.innerHTML = objects[selection].id+", Text: "+objects[selection].value;
+	} else {
+		selectionElt.innerHTML = objects[selection].id;
+	}
     } else {
 	selectionElt.innerHTML = "none";
     }
