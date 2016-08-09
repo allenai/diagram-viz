@@ -10,9 +10,9 @@ annotation json in one-json-per-image format, ```images``` should
 contain to the rescaled images, and ```images_original``` should
 contain the original images.
 
-```images``` can be populated from the AWS bucket ```s3:///ai2-vision-datasets/shining2/imagesResized```
+```images``` can be populated from the AWS bucket ```s3:///ai2-vision-datasets/shining3_resized/images```
 
-```images_original``` can be populated from the AWS bucket ```s3:///ai2-vision-datasets/shining2/images```
+```images_original``` can be populated from the AWS bucket ```s3:///ai2-vision-datasets/shining3/images```
 
 ## Usage
 

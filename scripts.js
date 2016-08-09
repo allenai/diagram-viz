@@ -64,7 +64,7 @@ function parseJson(j) {
 // Renders the content of the loaded json file.
 function displayContents(contents) {
     var j = JSON.parse(contents);
-    theJson = j;
+    theJson = j["data"];
     parseJson(theJson);
 
     init();
