@@ -60,6 +60,7 @@ function Text(id, score, value, topleft, bottomright) {
 	       (bottomright[1] - topleft[1]) * IMG_SCALE,
 	       (bottomright[0] - topleft[0]) * IMG_SCALE);
 	c.fillText(this.id, (topleft[1] * IMG_SCALE) + 2, (topleft[0] * IMG_SCALE) + 12);
+	//c.fillText(this.value, (topleft[1] * IMG_SCALE) + 2, (topleft[0] * IMG_SCALE) + 12);
 	c.stroke();
     };
 }
