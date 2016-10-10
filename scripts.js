@@ -22,7 +22,7 @@ var getFileObject = function(filePathOrUrl, cb) {
 };
 
 function parseJson(j) {
-    constituents = theJson["constituents"];
+    constituents = theJson["data"]["constituents"];
     drawnObjects = [];
 
     var blobs = constituents["blobs"];
@@ -107,7 +107,7 @@ function redraw() {
     drawObjects(drawnObjects, config);
 
     // Show object counts
-    var constituents = theJson["constituents"];
+    var constituents = theJson["data"]["constituents"];
 
     var blobs = constituents["blobs"];
     document.getElementById('num-blobs').innerHTML = count(blobs, -1);
@@ -255,7 +255,7 @@ function selectObject(x, y, objects, config) {
 }
 
 // global parameters
-var IMG_SCALE=3;
+var IMG_SCALE=2;
 
 // Main code that runs on page load.
 
